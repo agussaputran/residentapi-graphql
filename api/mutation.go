@@ -7,6 +7,7 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
+// MutationType func
 func MutationType() *graphql.Object {
 	return graphql.NewObject(
 		graphql.ObjectConfig{
