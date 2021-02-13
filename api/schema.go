@@ -6,7 +6,8 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-var schema, _ = graphql.NewSchema(
+// Schema global var
+var Schema, _ = graphql.NewSchema(
 	graphql.SchemaConfig{
 		Query:    QueryType(),
 		Mutation: MutationType(),
