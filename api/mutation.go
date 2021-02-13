@@ -1,6 +1,7 @@
 package api
 
 import (
+	"resident-graphql/fieldargs"
 	"resident-graphql/fieldtypes"
 	"resident-graphql/resolvers"
 
@@ -16,7 +17,7 @@ func MutationType() *graphql.Object {
 				"create_province": &graphql.Field{
 					Type:        fieldtypes.ProvinceType(),
 					Description: "Create new province",
-					Args:        typesargs.CreateProvinceArgs(),
+					Args:        fieldargs.CreateProvinceArgs(),
 					Resolve:     resolvers.CreateProvinceResolver,
 				},
 			},
