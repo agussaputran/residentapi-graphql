@@ -3,7 +3,7 @@ module resident-graphql
 go 1.15
 
 require (
-	github.com/graphql-go/graphql v0.7.9 // indirect
+	github.com/graphql-go/graphql v0.7.9
 	github.com/jackc/pgproto3/v2 v2.0.7 // indirect
 	github.com/joho/godotenv v1.3.0
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad
