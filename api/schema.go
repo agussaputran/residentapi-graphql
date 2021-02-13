@@ -1,11 +1,26 @@
 package api
 
-import "github.com/graphql-go/graphql"
+import (
+	"log"
 
-// Schema global var
-var Schema, _ = graphql.NewSchema(
+	"github.com/graphql-go/graphql"
+)
+
+var schema, _ = graphql.NewSchema(
 	graphql.SchemaConfig{
 		Query:    QueryType(),
 		Mutation: MutationType(),
 	},
 )
+
+// ExecuteQuery func
+func ExecuteQuery(query string, schema graphql.Schema) *graphql.Result {
+	result := graphql.Do(graphql.Params{
+		Schema:        schema,
+		RequestString: query,
+	})
+	if len(result.Errors) > 0 {
+		log.Println(result.Errors)
+	}
+	return result
+}
