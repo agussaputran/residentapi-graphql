@@ -12,6 +12,6 @@ type Provinces struct {
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
 	DeletedAt    gorm.DeletedAt `gorm:"index"`
-	ProvinceName string
-	District     []Districts `gorm:"ForeignKey:ProvinceID" json:"districts"`
+	ProvinceName string         `json:"province_name"`
+	District     []Districts    `gorm:"ForeignKey:ProvinceID" json:"districts"`
 }
