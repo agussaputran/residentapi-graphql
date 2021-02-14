@@ -38,3 +38,16 @@ func ReadDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 		Joins("left join provinces on provinces.id = districts.province_id").Scan(&response)
 	return response, nil
 }
+
+// UpdateDistrictResolver func
+func UpdateDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
+	db := *connection.GetConnection()
+	id, _ := p.Args["id"].(int)
+	name, _ := p.Args["district_name"].(string)
+
+	var district tables.Districts
+
+	db.Model(&district).Where("id = ?", id).Update("district_name", name)
+
+	return district, nil
+}
