@@ -14,6 +14,7 @@ func MutationType() *graphql.Object {
 		graphql.ObjectConfig{
 			Name: "Mutation",
 			Fields: graphql.Fields{
+				//? ============================== Provinces =======================================
 				"create_province": &graphql.Field{
 					Type:        fieldtypes.ProvinceType(),
 					Description: "Create new province",
@@ -32,6 +33,7 @@ func MutationType() *graphql.Object {
 					Args:        fieldargs.DeleteProvinceArgs(),
 					Resolve:     resolvers.DeleteProvinceResolver,
 				},
+				//? ============================== END of Provinces =======================================
 			},
 		},
 	)
