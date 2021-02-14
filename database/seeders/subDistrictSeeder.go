@@ -33,7 +33,7 @@ func seedSubDistrict(db *gorm.DB) {
 	for _, v1 := range subDistrictArray {
 		data, _ := strconv.ParseUint(v1[0], 10, 32)
 		subDist.DistrictID = uint(data)
-		subDist.Name = v1[1]
+		subDist.SubDistrictName = v1[1]
 		subDist.ID = 0
 		db.Create(&subDist)
 

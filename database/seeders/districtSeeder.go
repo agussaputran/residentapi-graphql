@@ -24,7 +24,7 @@ func seedDistrict(db *gorm.DB) {
 
 	for i := 0; i < 100; i++ {
 		uProvID, _ := strconv.ParseUint(response.RajaOngkir.CityResults[i].ProvinceID, 10, 32)
-		dist.Name = response.RajaOngkir.CityResults[i].CityName
+		dist.DistrictName = response.RajaOngkir.CityResults[i].CityName
 		dist.ProvinceID = uint(uProvID)
 		dist.ID = 0
 		db.Create(&dist)

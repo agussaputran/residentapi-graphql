@@ -22,7 +22,7 @@ func seedProvince(db *gorm.DB) {
 	}
 
 	for i := 0; i < len(response.RajaOngkir.ProvinceResults); i++ {
-		prov.Name = response.RajaOngkir.ProvinceResults[i].Province
+		prov.ProvinceName = response.RajaOngkir.ProvinceResults[i].Province
 		prov.ID = 0
 		db.Create(&prov)
 	}
