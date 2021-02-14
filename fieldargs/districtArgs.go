@@ -23,9 +23,6 @@ func UpdateDistrictArgs() graphql.FieldConfigArgument {
 		"district_name": &graphql.ArgumentConfig{
 			Type: graphql.NewNonNull(graphql.String),
 		},
-		"province_id": &graphql.ArgumentConfig{
-			Type: graphql.NewNonNull(graphql.Int),
-		},
 	}
 }
 
