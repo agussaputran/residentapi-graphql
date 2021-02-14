@@ -34,6 +34,27 @@ func MutationType() *graphql.Object {
 					Resolve:     resolvers.DeleteProvinceResolver,
 				},
 				//? ============================== END of Provinces =======================================
+
+				//? ============================== Districts =======================================
+				"create_district": &graphql.Field{
+					Type:        fieldtypes.DistrictType(),
+					Description: "Create new district",
+					Args:        fieldargs.CreateDistrictArgs(),
+					Resolve:     resolvers.CreateDistrictResolver,
+				},
+				"update_district": &graphql.Field{
+					Type:        fieldtypes.DistrictType(),
+					Description: "Update district",
+					Args:        fieldargs.UpdateDistrictArgs(),
+					Resolve:     resolvers.UpdateDistrictResolver,
+				},
+				"delete_district": &graphql.Field{
+					Type:        fieldtypes.DistrictType(),
+					Description: "Delete district",
+					Args:        fieldargs.DeleteDistrictArgs(),
+					Resolve:     resolvers.DeleteDistrictResolver,
+				},
+				//? ============================== END of Districts =======================================
 			},
 		},
 	)
