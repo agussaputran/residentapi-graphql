@@ -5,7 +5,7 @@ import "github.com/graphql-go/graphql"
 // CreateProvinceArgs for mutation args
 func CreateProvinceArgs() graphql.FieldConfigArgument {
 	return graphql.FieldConfigArgument{
-		"name": &graphql.ArgumentConfig{
+		"province_name": &graphql.ArgumentConfig{
 			Type: graphql.NewNonNull(graphql.String),
 		},
 	}
@@ -17,7 +17,7 @@ func UpdateProvinceArgs() graphql.FieldConfigArgument {
 		"id": &graphql.ArgumentConfig{
 			Type: graphql.NewNonNull(graphql.Int),
 		},
-		"name": &graphql.ArgumentConfig{
+		"province_name": &graphql.ArgumentConfig{
 			Type: graphql.NewNonNull(graphql.String),
 		},
 	}

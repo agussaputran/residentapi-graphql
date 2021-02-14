@@ -18,7 +18,7 @@ func CreateProvinceResolver(p graphql.ResolveParams) (interface{}, error) {
 	var province tables.Provinces
 
 	province.ID = uint(rand.Intn(100000))
-	province.Name = p.Args["name"].(string)
+	province.ProvinceName = p.Args["province_name"].(string)
 
 	db.Create(&province)
 
@@ -37,11 +37,11 @@ func ReadProvinceResolver(p graphql.ResolveParams) (interface{}, error) {
 func UpdateProvinceResolver(p graphql.ResolveParams) (interface{}, error) {
 	db := *connection.GetConnection()
 	id, _ := p.Args["id"].(int)
-	name, _ := p.Args["name"].(string)
+	name, _ := p.Args["province_name"].(string)
 
 	var province tables.Provinces
 
-	db.Model(&province).Where("id = ?", id).Update("name", name)
+	db.Model(&province).Where("id = ?", id).Update("province_name", name)
 
 	return province, nil
 }
