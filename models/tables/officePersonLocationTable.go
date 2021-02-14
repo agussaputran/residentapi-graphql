@@ -1,10 +1,17 @@
 package tables
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 // OfficePersonLocations table
 type OfficePersonLocations struct {
-	gorm.Model
-	OfficeID uint `json:"office_id"`
-	PersonID uint `json:"person_id"`
+	ID        uint `gorm:"primarykey" json:"id"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt gorm.DeletedAt `gorm:"index"`
+	OfficeID  uint           `json:"office_id"`
+	PersonID  uint           `json:"person_id"`
 }

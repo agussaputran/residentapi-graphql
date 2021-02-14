@@ -1,10 +1,17 @@
 package tables
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 // Districts table
 type Districts struct {
-	gorm.Model
+	ID           uint `gorm:"primarykey" json:"id"`
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
+	DeletedAt    gorm.DeletedAt `gorm:"index"`
 	DistrictName string         `json:"district_name"`
 	ProvinceID   uint           `json:"province_id"`
 	SubDistrict  []SubDistricts `gorm:"ForeignKey:DistrictID"`

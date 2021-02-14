@@ -1,13 +1,20 @@
 package tables
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 // QueueEmail Table
 type QueueEmail struct {
-	gorm.Model
-	Handled bool
-	To      string
-	Cc      string
-	Subject string
-	Message string
+	ID        uint `gorm:"primarykey" json:"id"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt gorm.DeletedAt `gorm:"index"`
+	Handled   bool
+	To        string
+	Cc        string
+	Subject   string
+	Message   string
 }
