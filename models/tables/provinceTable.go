@@ -8,10 +8,10 @@ import (
 
 // Provinces table
 type Provinces struct {
-	ID        uint `gorm:"primarykey" json:"id"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt `gorm:"index"`
-	Name      string
-	District  []Districts `gorm:"ForeignKey:ProvinceID" json:"districts"`
+	ID           uint `gorm:"primarykey" json:"id"`
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
+	DeletedAt    gorm.DeletedAt `gorm:"index"`
+	ProvinceName string
+	District     []Districts `gorm:"ForeignKey:ProvinceID" json:"districts"`
 }
