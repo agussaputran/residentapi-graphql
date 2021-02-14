@@ -14,6 +14,12 @@ func DistrictType() *graphql.Object {
 				"name": &graphql.Field{
 					Type: graphql.String,
 				},
+				"province_id": &graphql.Field{
+					Type: graphql.Int,
+				},
+				"province_name": &graphql.Field{
+					Type: graphql.String,
+				},
 			},
 		},
 	)

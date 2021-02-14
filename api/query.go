@@ -18,6 +18,11 @@ func QueryType() *graphql.Object {
 					Description: "Get Province List",
 					Resolve:     resolvers.ReadProvinceResolver,
 				},
+				"read_district": &graphql.Field{
+					Type:        graphql.NewList(fieldtypes.DistrictType()),
+					Description: "Get District List",
+					Resolve:     resolvers.ReadDistrictResolver,
+				},
 			},
 		},
 	)
