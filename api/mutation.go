@@ -20,6 +20,18 @@ func MutationType() *graphql.Object {
 					Args:        fieldargs.CreateProvinceArgs(),
 					Resolve:     resolvers.CreateProvinceResolver,
 				},
+				"update_province": &graphql.Field{
+					Type:        fieldtypes.ProvinceType(),
+					Description: "Update province",
+					Args:        fieldargs.UpdateProvinceArgs(),
+					Resolve:     resolvers.UpdateProvinceResolver,
+				},
+				"delete_province": &graphql.Field{
+					Type:        fieldtypes.ProvinceType(),
+					Description: "Delete province",
+					Args:        fieldargs.DeleteProvinceArgs(),
+					Resolve:     resolvers.DeleteProvinceResolver,
+				},
 			},
 		},
 	)

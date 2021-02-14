@@ -1,6 +1,7 @@
 package resolvers
 
 import (
+	"fmt"
 	"math/rand"
 	"resident-graphql/connection"
 	"resident-graphql/models/tables"
@@ -53,6 +54,7 @@ func DeleteProvinceResolver(p graphql.ResolveParams) (interface{}, error) {
 	var province tables.Provinces
 
 	db.Delete(&province, id)
+	fmt.Println(province)
 
 	return province, nil
 }
