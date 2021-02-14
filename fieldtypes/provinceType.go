@@ -11,7 +11,7 @@ func ProvinceType() *graphql.Object {
 				"id": &graphql.Field{
 					Type: graphql.Int,
 				},
-				"name": &graphql.Field{
+				"province_name": &graphql.Field{
 					Type: graphql.String,
 				},
 				"districts": &graphql.Field{
