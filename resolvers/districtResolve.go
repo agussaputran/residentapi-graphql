@@ -19,7 +19,7 @@ func CreateDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 
 	district.ID = uint(rand.Intn(100000))
 	district.DistrictName = p.Args["district_name"].(string)
-	district.ProvinceID = p.Args["province_id"].(uint)
+	district.ProvinceID = uint(p.Args["province_id"].(int))
 
 	db.Create(&district)
 
