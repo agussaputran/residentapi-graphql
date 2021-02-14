@@ -34,7 +34,7 @@ func ReadDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 		response []responses.DistrictResponse
 	)
 	db.Model(&district).
-		Select("districts.id, districts.name as district, provinces.name as province").
+		Select("districts.id, districts.district_name, provinces.province_name").
 		Joins("left join provinces on provinces.id = districts.province_id").Scan(&response)
 	return response, nil
 }
