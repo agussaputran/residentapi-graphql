@@ -84,6 +84,12 @@ func MutationType() *graphql.Object {
 					Args:        fieldargs.CreatePersonArgs(),
 					Resolve:     resolvers.CreatePersonResolver,
 				},
+				"update_person": &graphql.Field{
+					Type:        fieldtypes.PersonType(),
+					Description: "Update person",
+					Args:        fieldargs.UpdatePersonArgs(),
+					Resolve:     resolvers.UpdatePersonResolver,
+				},
 			},
 		},
 	)
