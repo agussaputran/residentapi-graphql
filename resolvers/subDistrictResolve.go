@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"math/rand"
 	"resident-graphql/connection"
+	"resident-graphql/helper"
+	"resident-graphql/middlewares"
 	"resident-graphql/models/responses"
 	"resident-graphql/models/tables"
 	"time"
@@ -17,6 +19,14 @@ func CreateSubDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 	rand.Seed(time.Now().UnixNano())
 
 	var subDistrict tables.SubDistricts
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		return nil, err
+	}
 
 	subDistrict.ID = uint(rand.Intn(100000))
 	subDistrict.SubDistrictName = p.Args["sub_district_name"].(string)
@@ -51,6 +61,14 @@ func UpdateSubDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 
 	var subDistrict tables.SubDistricts
 
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		return nil, err
+	}
+
 	db.Model(&subDistrict).Where("id = ?", id).Update("sub_district_name", name)
 
 	return subDistrict, nil
@@ -62,6 +80,14 @@ func DeleteSubDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 	id, _ := p.Args["id"].(int)
 
 	var subDistrict tables.SubDistricts
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" {
+		return nil, err
+	}
 
 	db.Delete(&subDistrict, id)
 	fmt.Println(subDistrict)
