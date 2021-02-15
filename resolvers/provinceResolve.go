@@ -51,6 +51,14 @@ func UpdateProvinceResolver(p graphql.ResolveParams) (interface{}, error) {
 	id, _ := p.Args["id"].(int)
 	name, _ := p.Args["province_name"].(string)
 
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		return nil, err
+	}
+
 	var province tables.Provinces
 
 	db.Model(&province).Where("id = ?", id).Update("province_name", name)
@@ -62,6 +70,14 @@ func UpdateProvinceResolver(p graphql.ResolveParams) (interface{}, error) {
 func DeleteProvinceResolver(p graphql.ResolveParams) (interface{}, error) {
 	db := *connection.GetConnection()
 	id, _ := p.Args["id"].(int)
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" {
+		return nil, err
+	}
 
 	var province tables.Provinces
 
