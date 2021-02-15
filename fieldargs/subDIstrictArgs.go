@@ -5,7 +5,7 @@ import "github.com/graphql-go/graphql"
 // CreateSubDistrictArgs for mutation args
 func CreateSubDistrictArgs() graphql.FieldConfigArgument {
 	return graphql.FieldConfigArgument{
-		"district_name": &graphql.ArgumentConfig{
+		"sub_district_name": &graphql.ArgumentConfig{
 			Type: graphql.NewNonNull(graphql.String),
 		},
 		"district_id": &graphql.ArgumentConfig{
