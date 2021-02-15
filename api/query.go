@@ -33,6 +33,11 @@ func QueryType() *graphql.Object {
 					Description: "Get Person List",
 					Resolve:     resolvers.ReadPersonResolver,
 				},
+				"read_office": &graphql.Field{
+					Type:        graphql.NewList(fieldtypes.OfficeType()),
+					Description: "Get office List",
+					Resolve:     resolvers.ReadOfficeResolver,
+				},
 			},
 		},
 	)
