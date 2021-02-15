@@ -2,6 +2,8 @@ package resolvers
 
 import (
 	"resident-graphql/connection"
+	"resident-graphql/helper"
+	"resident-graphql/middlewares"
 	"resident-graphql/models/responses"
 	"resident-graphql/models/tables"
 
@@ -15,6 +17,15 @@ func ReadReportGenderResolver(p graphql.ResolveParams) (interface{}, error) {
 		person   []tables.Persons
 		response []responses.ReportGenderResponse
 	)
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" && verifToken["role"] != "guest" {
+		return nil, err
+	}
+
 	db.Model(&person).
 		Select("gender, count(*) as total").Group("gender").Scan(&response)
 	return response, nil
@@ -27,6 +38,15 @@ func ReadReportPersonOfficeByGenderResolver(p graphql.ResolveParams) (interface{
 		person   []tables.Persons
 		response []responses.ReportGenderResponse
 	)
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" && verifToken["role"] != "guest" {
+		return nil, err
+	}
+
 	db.Model(&person).
 		Select("gender, count(*) as total").
 		Joins("join office_person_locations on persons.id = office_person_locations.person_id").
@@ -41,6 +61,14 @@ func ReadReportPersonOffice(p graphql.ResolveParams) (interface{}, error) {
 	var (
 		response []responses.ReportPersonOfficeResponse
 	)
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" && verifToken["role"] != "guest" {
+		return nil, err
+	}
 
 	db.Table("persons").Select("persons.id as id, persons.full_name, count(*) as total").
 		Joins(`join office_person_locations opl on opl.person_id = persons.id
