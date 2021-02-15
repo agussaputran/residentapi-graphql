@@ -76,6 +76,14 @@ func MutationType() *graphql.Object {
 					Resolve:     resolvers.DeleteSubDistrictResolver,
 				},
 				//? ============================== END of Sub Districts =======================================
+
+				//? ============================== Sub Persons =======================================
+				"create_person": &graphql.Field{
+					Type:        fieldtypes.PersonType(),
+					Description: "Create new person",
+					Args:        fieldargs.CreatePersonArgs(),
+					Resolve:     resolvers.CreatePersonResolver,
+				},
 			},
 		},
 	)
