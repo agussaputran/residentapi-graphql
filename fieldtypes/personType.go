@@ -6,7 +6,7 @@ import "github.com/graphql-go/graphql"
 func PersonType() *graphql.Object {
 	return graphql.NewObject(
 		graphql.ObjectConfig{
-			Name: "SubDistrict",
+			Name: "Person",
 			Fields: graphql.Fields{
 				"id": &graphql.Field{
 					Type: graphql.Int,
