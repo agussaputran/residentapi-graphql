@@ -18,6 +18,8 @@ func ReadSubDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 	db.Model(&subDistrict).
 		Select(`sub_districts.id, sub_districts.sub_district_name,
 		districts.district_name, provinces.province_name`).
-		Joins("left join provinces on provinces.id = districts.province_id").Scan(&response)
+		Joins(`left join districts
+		on districts.id = sub_districts.district_id left join provinces
+		on provinces.id = districts.province_id`).Scan(&response)
 	return response, nil
 }
