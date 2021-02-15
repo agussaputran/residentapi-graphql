@@ -25,6 +25,8 @@ func CreatePersonResolver(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		req := fmt.Sprintf("%v", verifToken["email"]) + " is trying to access " + helper.ReqBody
+		middlewares.Sentry(req)
 		return nil, err
 	}
 
@@ -57,6 +59,7 @@ func ReadPersonResolver(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" && verifToken["role"] != "entry" && verifToken["role"] != "guest" {
+		middlewares.Sentry(helper.ReqBody)
 		return nil, err
 	}
 
@@ -89,6 +92,8 @@ func UpdatePersonResolver(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		req := fmt.Sprintf("%v", verifToken["email"]) + " is trying to access " + helper.ReqBody
+		middlewares.Sentry(req)
 		return nil, err
 	}
 
@@ -119,6 +124,8 @@ func DeletePersonResolver(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" {
+		req := fmt.Sprintf("%v", verifToken["email"]) + " is trying to access " + helper.ReqBody
+		middlewares.Sentry(req)
 		return nil, err
 	}
 
