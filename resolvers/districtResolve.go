@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"math/rand"
 	"resident-graphql/connection"
+	"resident-graphql/helper"
+	"resident-graphql/middlewares"
 	"resident-graphql/models/responses"
 	"resident-graphql/models/tables"
 	"time"
@@ -17,6 +19,14 @@ func CreateDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 	rand.Seed(time.Now().UnixNano())
 
 	var district tables.Districts
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		return nil, err
+	}
 
 	district.ID = uint(rand.Intn(100000))
 	district.DistrictName = p.Args["district_name"].(string)
@@ -46,6 +56,14 @@ func UpdateDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 	id, _ := p.Args["id"].(int)
 	name, _ := p.Args["district_name"].(string)
 
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		return nil, err
+	}
+
 	var district tables.Districts
 
 	db.Model(&district).Where("id = ?", id).Update("district_name", name)
@@ -57,6 +75,14 @@ func UpdateDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 func DeleteDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 	db := *connection.GetConnection()
 	id, _ := p.Args["id"].(int)
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" {
+		return nil, err
+	}
 
 	var district tables.Districts
 
