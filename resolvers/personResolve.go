@@ -19,8 +19,6 @@ func ReadPersonResolver(p graphql.ResolveParams) (interface{}, error) {
 		Select(`persons.id, persons.nip, persons.full_name, persons.first_name,
 		persons.last_name, persons.birth_date, persons.birth_place, persons.photo_profile_url,
 		persons.gender, persons.zone_location, sub_districts.sub_district_name`).
-		Joins(`left join districts
-		on districts.id = sub_districts.district_id left join provinces
-		on provinces.id = districts.province_id`).Scan(&response)
+		Joins("left join sub_districts on sub_districts.id = persons.sub_district_id").Scan(&response)
 	return response, nil
 }
