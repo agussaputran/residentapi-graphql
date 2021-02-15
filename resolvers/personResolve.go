@@ -47,3 +47,34 @@ func ReadPersonResolver(p graphql.ResolveParams) (interface{}, error) {
 		Joins("left join sub_districts on sub_districts.id = persons.sub_district_id").Scan(&response)
 	return response, nil
 }
+
+// UpdatePersonResolver func
+func UpdatePersonResolver(p graphql.ResolveParams) (interface{}, error) {
+	db := *connection.GetConnection()
+	id, _ := p.Args["id"].(int)
+	nip, _ := p.Args["nip"].(string)
+	fullName, _ := p.Args["full_name"].(string)
+	firstName, _ := p.Args["first_name"].(string)
+	lastName, _ := p.Args["last_name"].(string)
+	birthDate, _ := p.Args["birth_date"].(string)
+	birthPlace, _ := p.Args["birth_place"].(string)
+	gender, _ := p.Args["gender"].(string)
+	zoneLoc, _ := p.Args["zone_location"].(string)
+	subDistrictID, _ := p.Args["sub_district_id"].(int)
+
+	var person tables.Persons
+
+	db.Model(&person).Where("id = ?", id).Updates(tables.Persons{
+		Nip:           nip,
+		FullName:      fullName,
+		FirstName:     firstName,
+		LastName:      lastName,
+		BirthDate:     birthDate,
+		BirthPlace:    birthPlace,
+		Gender:        gender,
+		ZoneLocation:  zoneLoc,
+		SubDistrictID: uint(subDistrictID),
+	})
+
+	return person, nil
+}
