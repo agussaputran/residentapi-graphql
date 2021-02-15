@@ -25,6 +25,8 @@ func CreateOfficeResolver(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		req := fmt.Sprintf("%v", verifToken["email"]) + " is trying to access " + helper.ReqBody
+		middlewares.Sentry(req)
 		return nil, err
 	}
 
@@ -50,6 +52,7 @@ func ReadOfficeResolver(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" && verifToken["role"] != "entry" && verifToken["role"] != "guest" {
+		middlewares.Sentry(helper.ReqBody)
 		return nil, err
 	}
 
@@ -73,6 +76,8 @@ func UpdateOfficeResolver(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		req := fmt.Sprintf("%v", verifToken["email"]) + " is trying to access " + helper.ReqBody
+		middlewares.Sentry(req)
 		return nil, err
 	}
 
@@ -93,6 +98,8 @@ func DeleteOfficeResolver(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" {
+		req := fmt.Sprintf("%v", verifToken["email"]) + " is trying to access " + helper.ReqBody
+		middlewares.Sentry(req)
 		return nil, err
 	}
 
