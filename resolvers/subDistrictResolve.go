@@ -1,12 +1,30 @@
 package resolvers
 
 import (
+	"math/rand"
 	"resident-graphql/connection"
 	"resident-graphql/models/responses"
 	"resident-graphql/models/tables"
+	"time"
 
 	"github.com/graphql-go/graphql"
 )
+
+// CreateSubDistrictResolver func
+func CreateSubDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
+	db := *connection.GetConnection()
+	rand.Seed(time.Now().UnixNano())
+
+	var subDistrict tables.SubDistricts
+
+	subDistrict.ID = uint(rand.Intn(100000))
+	subDistrict.SubDistrictName = p.Args["district_name"].(string)
+	subDistrict.DistrictID = uint(p.Args["district"].(int))
+
+	db.Create(&subDistrict)
+
+	return subDistrict, nil
+}
 
 // ReadSubDistrictResolver func
 func ReadSubDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
