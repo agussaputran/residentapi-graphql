@@ -41,3 +41,16 @@ func ReadSubDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 		on provinces.id = districts.province_id`).Scan(&response)
 	return response, nil
 }
+
+// UpdateSubDistrictResolver func
+func UpdateSubDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
+	db := *connection.GetConnection()
+	id, _ := p.Args["id"].(int)
+	name, _ := p.Args["sub_district_name"].(string)
+
+	var subDistrict tables.SubDistricts
+
+	db.Model(&subDistrict).Where("id = ?", id).Update("sub_district_name", name)
+
+	return subDistrict, nil
+}
