@@ -1,12 +1,37 @@
 package resolvers
 
 import (
+	"math/rand"
 	"resident-graphql/connection"
 	"resident-graphql/models/responses"
 	"resident-graphql/models/tables"
+	"time"
 
 	"github.com/graphql-go/graphql"
 )
+
+// CreatePersonResolver func
+func CreatePersonResolver(p graphql.ResolveParams) (interface{}, error) {
+	db := *connection.GetConnection()
+	rand.Seed(time.Now().UnixNano())
+
+	var person tables.Persons
+
+	person.ID = uint(rand.Intn(100000))
+	person.Nip = p.Args["nip"].(string)
+	person.FullName = p.Args["full_name"].(string)
+	person.FirstName = p.Args["first_name"].(string)
+	person.LastName = p.Args["last_name"].(string)
+	person.BirthDate = p.Args["birth_date"].(string)
+	person.BirthPlace = p.Args["birth_place"].(string)
+	person.Gender = p.Args["gender"].(string)
+	person.ZoneLocation = p.Args["zone_location"].(string)
+	person.SubDistrictID = uint(p.Args["sub_district_id"].(int))
+
+	db.Create(&person)
+
+	return person, nil
+}
 
 // ReadPersonResolver func
 func ReadPersonResolver(p graphql.ResolveParams) (interface{}, error) {
