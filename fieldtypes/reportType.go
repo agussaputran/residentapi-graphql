@@ -34,9 +34,6 @@ func ReportPersonOfficeType() *graphql.Object {
 				"total": &graphql.Field{
 					Type: graphql.Int,
 				},
-				"districts": &graphql.Field{
-					Type: graphql.NewList(DistrictType()),
-				},
 			},
 		},
 	)

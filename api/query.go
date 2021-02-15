@@ -48,6 +48,11 @@ func QueryType() *graphql.Object {
 					Description: "Get count person handle office by gender",
 					Resolve:     resolvers.ReadReportPersonOfficeByGenderResolver,
 				},
+				"read_person_office": &graphql.Field{
+					Type:        graphql.NewList(fieldtypes.ReportPersonOfficeType()),
+					Description: "getget",
+					Resolve:     resolvers.ReadReportPersonOffice,
+				},
 			},
 		},
 	)
