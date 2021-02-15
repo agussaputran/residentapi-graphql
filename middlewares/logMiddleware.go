@@ -17,6 +17,15 @@ func LogRequest(c *gin.Context) string {
 	reqPath := c.Request.URL.Path
 	buf, _ := ioutil.ReadAll(c.Request.Body)
 	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(buf))
+	return string(reqMethod) + " -> " + reqPath
+}
+
+// LogRequestBody for logging request to senrty.io
+func LogRequestBody(c *gin.Context) string {
+	reqMethod := c.Request.Method
+	reqPath := c.Request.URL.Path
+	buf, _ := ioutil.ReadAll(c.Request.Body)
+	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(buf))
 	return string(reqMethod) + " -> " + reqPath + "\n" + string(buf)
 }
 

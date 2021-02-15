@@ -1,10 +1,12 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"resident-graphql/api"
 	"resident-graphql/connection"
 	"resident-graphql/helper"
+	"resident-graphql/middlewares"
 
 	"github.com/gin-gonic/gin"
 )
@@ -21,6 +23,8 @@ func main() {
 		}
 
 		helper.Token = c.Request.Header.Get("Authorization")
+
+		log.Println(middlewares.LogRequest(c))
 
 		var query Query
 		c.Bind(&query)
