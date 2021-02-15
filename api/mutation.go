@@ -105,6 +105,12 @@ func MutationType() *graphql.Object {
 					Args:        fieldargs.CreateOfficeArgs(),
 					Resolve:     resolvers.CreateOfficeResolver,
 				},
+				"update_office": &graphql.Field{
+					Type:        fieldtypes.OfficeType(),
+					Description: "Update office",
+					Args:        fieldargs.UpdateOfficeArgs(),
+					Resolve:     resolvers.UpdateOfficeResolver,
+				},
 				//? ============================== END of Persons =======================================
 			},
 		},
