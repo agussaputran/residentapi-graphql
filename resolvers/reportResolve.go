@@ -16,8 +16,6 @@ func ReadReportGenderResolver(p graphql.ResolveParams) (interface{}, error) {
 		response []responses.ReportGenderResponse
 	)
 	db.Model(&person).
-		Select().
-		Joins().
-		Scan(&response)
+		Select("gender, count(*) as total").Group("gender").Scan(&response)
 	return response, nil
 }
