@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"math/rand"
 	"resident-graphql/connection"
+	"resident-graphql/helper"
+	"resident-graphql/middlewares"
 	"resident-graphql/models/responses"
 	"resident-graphql/models/tables"
 	"time"
@@ -17,6 +19,14 @@ func CreateOfficeResolver(p graphql.ResolveParams) (interface{}, error) {
 	rand.Seed(time.Now().UnixNano())
 
 	var office tables.Offices
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		return nil, err
+	}
 
 	office.ID = uint(rand.Intn(100000))
 	office.OfficeName = p.Args["office_name"].(string)
@@ -34,6 +44,15 @@ func ReadOfficeResolver(p graphql.ResolveParams) (interface{}, error) {
 		office   []tables.Offices
 		response []responses.OfficeResponse
 	)
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" && verifToken["role"] != "guest" {
+		return nil, err
+	}
+
 	db.Model(&office).
 		Select("offices.id, offices.office_name, sub_districts.sub_district_name").
 		Joins("left join sub_districts on sub_districts.id = offices.sub_district_id").
@@ -49,6 +68,14 @@ func UpdateOfficeResolver(p graphql.ResolveParams) (interface{}, error) {
 
 	var office tables.Offices
 
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		return nil, err
+	}
+
 	db.Model(&office).Where("id = ?", id).Update("office_name", name)
 
 	return office, nil
@@ -60,6 +87,14 @@ func DeleteOfficeResolver(p graphql.ResolveParams) (interface{}, error) {
 	id, _ := p.Args["id"].(int)
 
 	var office tables.Offices
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" {
+		return nil, err
+	}
 
 	db.Delete(&office, id)
 	fmt.Println(office)
