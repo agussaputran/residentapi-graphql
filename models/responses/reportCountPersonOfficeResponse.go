@@ -1,7 +1,7 @@
 package responses
 
-// ReportCountPersonOfficeResponse model
-type ReportCountPersonOfficeResponse struct {
-	OfficeName string `json:"office_name"`
-	CounPerson int64  `json:"count_person"`
+// ReportGenderResponse model
+type ReportGenderResponse struct {
+	Gender string `json:"gender"`
+	Total  int64  `json:"total"`
 }
