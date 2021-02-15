@@ -8,10 +8,7 @@ func UserLoginType() *graphql.Object {
 		graphql.ObjectConfig{
 			Name: "UserLogin",
 			Fields: graphql.Fields{
-				"id": &graphql.Field{
-					Type: graphql.Int,
-				},
-				"username": &graphql.Field{
+				"email": &graphql.Field{
 					Type: graphql.String,
 				},
 				"token": &graphql.Field{

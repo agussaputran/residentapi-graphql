@@ -118,6 +118,12 @@ func MutationType() *graphql.Object {
 					Resolve:     resolvers.DeleteOfficeResolver,
 				},
 				//? ============================== END of Offices =======================================
+				"login": &graphql.Field{
+					Type:        fieldtypes.UserLoginType(),
+					Description: "login",
+					Args:        fieldargs.UserLoginArgs(),
+					Resolve:     resolvers.LoginResolver,
+				},
 			},
 		},
 	)
