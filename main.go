@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"resident-graphql/api"
 	"resident-graphql/connection"
+	"resident-graphql/helper"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,6 +19,8 @@ func main() {
 		type Query struct {
 			Query string
 		}
+
+		helper.Token = c.Request.Header.Get("Authorization")
 
 		var query Query
 		c.Bind(&query)

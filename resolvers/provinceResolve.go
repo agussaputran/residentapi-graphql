@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"math/rand"
 	"resident-graphql/connection"
+	"resident-graphql/helper"
+	"resident-graphql/middlewares"
 	"resident-graphql/models/tables"
 	"time"
 
@@ -13,7 +15,16 @@ import (
 // CreateProvinceResolver func
 func CreateProvinceResolver(p graphql.ResolveParams) (interface{}, error) {
 	db := *connection.GetConnection()
+
 	rand.Seed(time.Now().UnixNano())
+
+	verifToken, err := middlewares.VerifyToken(*helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" {
+		return nil, err
+	}
 
 	var province tables.Provinces
 
@@ -23,6 +34,7 @@ func CreateProvinceResolver(p graphql.ResolveParams) (interface{}, error) {
 	db.Create(&province)
 
 	return province, nil
+
 }
 
 // ReadProvinceResolver func

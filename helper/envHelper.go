@@ -7,6 +7,9 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// Token global
+var Token *string
+
 // GetEnvVar func
 func GetEnvVar(key string) string {
 	err := godotenv.Load(".env")
