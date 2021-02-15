@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"math/rand"
 	"resident-graphql/connection"
+	"resident-graphql/helper"
+	"resident-graphql/middlewares"
 	"resident-graphql/models/responses"
 	"resident-graphql/models/tables"
 	"time"
@@ -17,6 +19,14 @@ func CreatePersonResolver(p graphql.ResolveParams) (interface{}, error) {
 	rand.Seed(time.Now().UnixNano())
 
 	var person tables.Persons
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		return nil, err
+	}
 
 	person.ID = uint(rand.Intn(100000))
 	person.Nip = p.Args["nip"].(string)
@@ -41,6 +51,15 @@ func ReadPersonResolver(p graphql.ResolveParams) (interface{}, error) {
 		person   []tables.Persons
 		response []responses.PersonResponse
 	)
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" && verifToken["role"] != "guest" {
+		return nil, err
+	}
+
 	db.Model(&person).
 		Select(`persons.id, persons.nip, persons.full_name, persons.first_name,
 		persons.last_name, persons.birth_date, persons.birth_place, persons.photo_profile_url,
@@ -65,6 +84,14 @@ func UpdatePersonResolver(p graphql.ResolveParams) (interface{}, error) {
 
 	var person tables.Persons
 
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		return nil, err
+	}
+
 	db.Model(&person).Where("id = ?", id).Updates(tables.Persons{
 		Nip:           nip,
 		FullName:      fullName,
@@ -86,6 +113,14 @@ func DeletePersonResolver(p graphql.ResolveParams) (interface{}, error) {
 	id, _ := p.Args["id"].(int)
 
 	var person tables.Persons
+
+	verifToken, err := middlewares.VerifyToken(helper.Token)
+	if err != nil {
+		return nil, err
+	}
+	if verifToken["role"] != "admin" {
+		return nil, err
+	}
 
 	db.Delete(&person, id)
 	fmt.Println(person)
