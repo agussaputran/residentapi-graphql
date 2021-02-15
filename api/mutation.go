@@ -69,6 +69,12 @@ func MutationType() *graphql.Object {
 					Args:        fieldargs.UpdateSubDistrictArgs(),
 					Resolve:     resolvers.UpdateSubDistrictResolver,
 				},
+				"delete_sub_district": &graphql.Field{
+					Type:        fieldtypes.SubDistrictType(),
+					Description: "Delete district",
+					Args:        fieldargs.DeleteSubDistrictArgs(),
+					Resolve:     resolvers.DeleteSubDistrictResolver,
+				},
 				//? ============================== END of Sub Districts =======================================
 			},
 		},
