@@ -39,3 +39,16 @@ func ReadOfficeResolver(p graphql.ResolveParams) (interface{}, error) {
 		Scan(&response)
 	return response, nil
 }
+
+// UpdateOfficeResolver func
+func UpdateOfficeResolver(p graphql.ResolveParams) (interface{}, error) {
+	db := *connection.GetConnection()
+	id, _ := p.Args["id"].(int)
+	name, _ := p.Args["office_name"].(string)
+
+	var office tables.Offices
+
+	db.Model(&office).Where("id = ?", id).Update("office_name", name)
+
+	return office, nil
+}
