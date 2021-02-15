@@ -28,6 +28,11 @@ func QueryType() *graphql.Object {
 					Description: "Get Sub District List",
 					Resolve:     resolvers.ReadSubDistrictResolver,
 				},
+				"read_person": &graphql.Field{
+					Type:        graphql.NewList(fieldtypes.PersonType()),
+					Description: "Get Person List",
+					Resolve:     resolvers.ReadPersonResolver,
+				},
 			},
 		},
 	)
