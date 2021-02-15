@@ -25,6 +25,8 @@ func CreateDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		req := fmt.Sprintf("%v", verifToken["email"]) + " is trying to access " + helper.ReqBody
+		middlewares.Sentry(req)
 		return nil, err
 	}
 
@@ -61,6 +63,8 @@ func UpdateDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
+		req := fmt.Sprintf("%v", verifToken["email"]) + " is trying to access " + helper.ReqBody
+		middlewares.Sentry(req)
 		return nil, err
 	}
 
@@ -81,6 +85,8 @@ func DeleteDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" {
+		req := fmt.Sprintf("%v", verifToken["email"]) + " is trying to access " + helper.ReqBody
+		middlewares.Sentry(req)
 		return nil, err
 	}
 
