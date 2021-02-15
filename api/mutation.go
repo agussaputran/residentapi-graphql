@@ -90,6 +90,12 @@ func MutationType() *graphql.Object {
 					Args:        fieldargs.UpdatePersonArgs(),
 					Resolve:     resolvers.UpdatePersonResolver,
 				},
+				"delete_person": &graphql.Field{
+					Type:        fieldtypes.PersonType(),
+					Description: "Delete person",
+					Args:        fieldargs.DeletePersonArgs(),
+					Resolve:     resolvers.DeletePersonResolver,
+				},
 			},
 		},
 	)
