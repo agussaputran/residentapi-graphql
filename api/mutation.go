@@ -96,6 +96,16 @@ func MutationType() *graphql.Object {
 					Args:        fieldargs.DeletePersonArgs(),
 					Resolve:     resolvers.DeletePersonResolver,
 				},
+				//? ============================== END of Persons =======================================
+
+				//? ============================== Sub Persons =======================================
+				"create_office": &graphql.Field{
+					Type:        fieldtypes.OfficeType(),
+					Description: "Create new office",
+					Args:        fieldargs.CreateOfficeArgs(),
+					Resolve:     resolvers.CreateOfficeResolver,
+				},
+				//? ============================== END of Persons =======================================
 			},
 		},
 	)
