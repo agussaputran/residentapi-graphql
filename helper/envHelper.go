@@ -10,6 +10,9 @@ import (
 // Token global
 var Token string
 
+// ReqBody global
+var ReqBody string
+
 // GetEnvVar func
 func GetEnvVar(key string) string {
 	err := godotenv.Load(".env")

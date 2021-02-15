@@ -23,6 +23,7 @@ func main() {
 		}
 
 		helper.Token = c.Request.Header.Get("Authorization")
+		helper.ReqBody = middlewares.LogRequestBody(c)
 
 		log.Println(middlewares.LogRequest(c))
 
