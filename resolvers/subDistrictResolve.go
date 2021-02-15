@@ -18,8 +18,8 @@ func CreateSubDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 	var subDistrict tables.SubDistricts
 
 	subDistrict.ID = uint(rand.Intn(100000))
-	subDistrict.SubDistrictName = p.Args["district_name"].(string)
-	subDistrict.DistrictID = uint(p.Args["district"].(int))
+	subDistrict.SubDistrictName = p.Args["sub_district_name"].(string)
+	subDistrict.DistrictID = uint(p.Args["district_id"].(int))
 
 	db.Create(&subDistrict)
 

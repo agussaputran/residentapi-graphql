@@ -55,6 +55,15 @@ func MutationType() *graphql.Object {
 					Resolve:     resolvers.DeleteDistrictResolver,
 				},
 				//? ============================== END of Districts =======================================
+
+				//? ============================== Sub Districts =======================================
+				"create_sub_district": &graphql.Field{
+					Type:        fieldtypes.SubDistrictType(),
+					Description: "Create new district",
+					Args:        fieldargs.CreateSubDistrictArgs(),
+					Resolve:     resolvers.CreateSubDistrictResolver,
+				},
+				//? ============================== END of Sub Districts =======================================
 			},
 		},
 	)
