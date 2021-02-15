@@ -1,6 +1,7 @@
 package resolvers
 
 import (
+	"fmt"
 	"math/rand"
 	"resident-graphql/connection"
 	"resident-graphql/models/responses"
@@ -49,6 +50,19 @@ func UpdateOfficeResolver(p graphql.ResolveParams) (interface{}, error) {
 	var office tables.Offices
 
 	db.Model(&office).Where("id = ?", id).Update("office_name", name)
+
+	return office, nil
+}
+
+// DeleteOfficeResolver func
+func DeleteOfficeResolver(p graphql.ResolveParams) (interface{}, error) {
+	db := *connection.GetConnection()
+	id, _ := p.Args["id"].(int)
+
+	var office tables.Offices
+
+	db.Delete(&office, id)
+	fmt.Println(office)
 
 	return office, nil
 }
