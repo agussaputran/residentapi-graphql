@@ -8,7 +8,7 @@ import (
 )
 
 // Token global
-var Token *string
+var Token string
 
 // GetEnvVar func
 func GetEnvVar(key string) string {

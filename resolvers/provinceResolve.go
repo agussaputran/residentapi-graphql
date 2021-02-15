@@ -18,11 +18,11 @@ func CreateProvinceResolver(p graphql.ResolveParams) (interface{}, error) {
 
 	rand.Seed(time.Now().UnixNano())
 
-	verifToken, err := middlewares.VerifyToken(*helper.Token)
+	verifToken, err := middlewares.VerifyToken(helper.Token)
 	if err != nil {
 		return nil, err
 	}
-	if verifToken["role"] != "admin" {
+	if verifToken["role"] != "admin" && verifToken["role"] != "entry" {
 		return nil, err
 	}
 
