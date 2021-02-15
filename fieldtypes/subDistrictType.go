@@ -6,12 +6,11 @@ import "github.com/graphql-go/graphql"
 func SubDistrictType() *graphql.Object {
 	return graphql.NewObject(
 		graphql.ObjectConfig{
-			Name: "District",
+			Name: "SubDistrict",
 			Fields: graphql.Fields{
 				"id": &graphql.Field{
 					Type: graphql.Int,
 				},
-
 				"sub_district_name": &graphql.Field{
 					Type: graphql.String,
 				},
