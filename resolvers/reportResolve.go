@@ -23,6 +23,7 @@ func ReadReportGenderResolver(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" && verifToken["role"] != "entry" && verifToken["role"] != "guest" {
+		middlewares.Sentry(helper.ReqBody)
 		return nil, err
 	}
 
@@ -44,6 +45,7 @@ func ReadReportPersonOfficeByGenderResolver(p graphql.ResolveParams) (interface{
 		return nil, err
 	}
 	if verifToken["role"] != "admin" && verifToken["role"] != "entry" && verifToken["role"] != "guest" {
+		middlewares.Sentry(helper.ReqBody)
 		return nil, err
 	}
 
@@ -67,6 +69,7 @@ func ReadReportPersonOffice(p graphql.ResolveParams) (interface{}, error) {
 		return nil, err
 	}
 	if verifToken["role"] != "admin" && verifToken["role"] != "entry" && verifToken["role"] != "guest" {
+		middlewares.Sentry(helper.ReqBody)
 		return nil, err
 	}
 
