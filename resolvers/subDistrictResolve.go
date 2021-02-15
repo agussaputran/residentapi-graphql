@@ -1,6 +1,7 @@
 package resolvers
 
 import (
+	"fmt"
 	"math/rand"
 	"resident-graphql/connection"
 	"resident-graphql/models/responses"
@@ -51,6 +52,19 @@ func UpdateSubDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
 	var subDistrict tables.SubDistricts
 
 	db.Model(&subDistrict).Where("id = ?", id).Update("sub_district_name", name)
+
+	return subDistrict, nil
+}
+
+// DeleteSubDistrictResolver func
+func DeleteSubDistrictResolver(p graphql.ResolveParams) (interface{}, error) {
+	db := *connection.GetConnection()
+	id, _ := p.Args["id"].(int)
+
+	var subDistrict tables.SubDistricts
+
+	db.Delete(&subDistrict, id)
+	fmt.Println(subDistrict)
 
 	return subDistrict, nil
 }
