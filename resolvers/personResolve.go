@@ -1,6 +1,7 @@
 package resolvers
 
 import (
+	"fmt"
 	"math/rand"
 	"resident-graphql/connection"
 	"resident-graphql/models/responses"
@@ -75,6 +76,19 @@ func UpdatePersonResolver(p graphql.ResolveParams) (interface{}, error) {
 		ZoneLocation:  zoneLoc,
 		SubDistrictID: uint(subDistrictID),
 	})
+
+	return person, nil
+}
+
+// DeletePersonResolver func
+func DeletePersonResolver(p graphql.ResolveParams) (interface{}, error) {
+	db := *connection.GetConnection()
+	id, _ := p.Args["id"].(int)
+
+	var person tables.Persons
+
+	db.Delete(&person, id)
+	fmt.Println(person)
 
 	return person, nil
 }
