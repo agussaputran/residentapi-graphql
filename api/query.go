@@ -24,9 +24,9 @@ func QueryType() *graphql.Object {
 					Resolve:     resolvers.ReadDistrictResolver,
 				},
 				"read_sub_district": &graphql.Field{
-					Type:        graphql.NewList(fieldtypes.Subs()),
-					Description: "Get District List",
-					Resolve:     resolvers.ReadDistrictResolver,
+					Type:        graphql.NewList(fieldtypes.SubDistrictType()),
+					Description: "Get Sub District List",
+					Resolve:     resolvers.ReadSubDistrictResolver,
 				},
 			},
 		},

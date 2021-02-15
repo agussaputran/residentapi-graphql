@@ -2,8 +2,8 @@ package fieldtypes
 
 import "github.com/graphql-go/graphql"
 
-// SubDistrictName type
-func SubDistrictName() *graphql.Object {
+// SubDistrictType type
+func SubDistrictType() *graphql.Object {
 	return graphql.NewObject(
 		graphql.ObjectConfig{
 			Name: "District",
