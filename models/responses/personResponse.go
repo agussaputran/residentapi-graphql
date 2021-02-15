@@ -12,5 +12,5 @@ type PersonResponse struct {
 	PhotoProfileURL string `json:"photo_profile_url"`
 	Gender          string `json:"gender"`
 	ZoneLocation    string `json:"zone_location"`
-	SubDistrict     string `json:"sub_district"`
+	SubDistrictName string `json:"sub_district_name"`
 }
