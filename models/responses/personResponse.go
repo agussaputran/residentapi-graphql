@@ -2,7 +2,7 @@ package responses
 
 // PersonResponse model
 type PersonResponse struct {
-	ID              uint
+	ID              uint   `json:"id"`
 	Nip             string `json:"nip"`
 	FullName        string `json:"full_name"`
 	FirstName       string `json:"first_name"`
