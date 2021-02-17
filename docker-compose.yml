@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    container_name: full_app
+    container_name: resident-graphql-go-app
     build: .
     ports: 
       - 8080:8080 
@@ -9,25 +9,25 @@ services:
     volumes:
       - api:/usr/src/app/
     depends_on:
-      - fullstack-postgres          
+      - residentapp-postgres-db         
     networks:
-      - fullstack
+      - resident
 
 
-  fullstack-postgres:
-    image: postgres:latest
-    container_name: full_db_postgres
+  residentapp-postgres-db:
+    image: postgres:9.6.21
+    container_name: resident-postgres-db
     environment:
       - POSTGRES_USER=${DB_USER}  
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
       - DATABASE_HOST=${DB_HOST} 
     ports:
-      - '5432:5432'
+      - '6000:5432'
     volumes:
       - database_postgres:/var/lib/postgresql/data
     networks:
-      - fullstack
+      - resident
 
 volumes:
   api:
@@ -35,5 +35,5 @@ volumes:
 
 # Networks to be created to facilitate communication between containers
 networks:
-  fullstack:
+  resident:
     driver: bridge
