@@ -2,14 +2,14 @@ package middlewares
 
 import (
 	"fmt"
-	"resident-graphql/helper"
+	"os"
 
 	"github.com/dgrijalva/jwt-go"
 )
 
 // VerifyToken func
 func VerifyToken(tokenString string) (jwt.MapClaims, error) {
-	secret := helper.GetEnvVar("JWT_SECRET")
+	secret := os.Getenv("JWT_SECRET")
 	// when authorization is nil
 	if tokenString == "" {
 		return nil, fmt.Errorf("Missing Authorization Header")

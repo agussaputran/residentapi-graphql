@@ -2,8 +2,8 @@ package resolvers
 
 import (
 	"log"
+	"os"
 	"resident-graphql/connection"
-	"resident-graphql/helper"
 	"resident-graphql/models/tables"
 	"time"
 
@@ -46,7 +46,7 @@ func LoginResolver(p graphql.ResolveParams) (interface{}, error) {
 			},
 		}
 		sign := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), claims)
-		token, err := sign.SignedString([]byte(helper.GetEnvVar("JWT_SECRET")))
+		token, err := sign.SignedString([]byte(os.Getenv("JWT_SECRET")))
 		if err != nil {
 			log.Println("Gagal create token, message ", err.Error())
 			result = map[string]interface{}{

@@ -4,13 +4,13 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"resident-graphql/helper"
+	"os"
 )
 
 // FetchFromRajaongkir from api.rajaongkir.com
 func FetchFromRajaongkir(data string) []byte {
 	baseURL := "https://api.rajaongkir.com/starter"
-	apiKey := helper.GetEnvVar("RAJAONGKIR_APIKEY")
+	apiKey := os.Getenv("RAJAONGKIR_APIKEY")
 	res, err := http.Get(baseURL + data + "?key=" + apiKey)
 	if err != nil {
 		log.Fatalln("Error -> ", err.Error())

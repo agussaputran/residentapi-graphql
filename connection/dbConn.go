@@ -2,7 +2,7 @@ package connection
 
 import (
 	"log"
-	"resident-graphql/helper"
+	"os"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -22,13 +22,13 @@ func Connect() {
 		dbTimeZone string
 	)
 
-	dbHost = helper.GetEnvVar("DB_HOST")
-	dbUser = helper.GetEnvVar("DB_USER")
-	dbPassword = helper.GetEnvVar("DB_PASSWORD")
-	dbName = helper.GetEnvVar("DB_NAME")
-	dbPort = helper.GetEnvVar("DB_PORT")
-	dbSsl = helper.GetEnvVar("DB_SSL")
-	dbTimeZone = helper.GetEnvVar("DB_TIMEZONE")
+	dbHost = os.Getenv("DB_HOST")
+	dbUser = os.Getenv("DB_USER")
+	dbPassword = os.Getenv("DB_PASSWORD")
+	dbName = os.Getenv("DB_NAME")
+	dbPort = os.Getenv("DB_PORT")
+	dbSsl = os.Getenv("DB_SSL")
+	dbTimeZone = os.Getenv("DB_TIMEZONE")
 
 	conn := " host=" + dbHost +
 		" user=" + dbUser +
