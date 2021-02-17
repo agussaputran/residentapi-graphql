@@ -16,7 +16,7 @@ func SetEnvVar() {
 	os.Setenv("DB_USER", "postgres")
 	os.Setenv("DB_PASSWORD", "r3m3mb3r34")
 	os.Setenv("DB_NAME", "resident-graphql")
-	os.Setenv("DB_PORT", "5000")
+	os.Setenv("DB_PORT", "5432")
 	os.Setenv("DB_SSL", "disable")
 	os.Setenv("DB_TIMEZONE", "Asia/Shanghai")
 	os.Setenv("JWT_SECRET", "kodebom")
