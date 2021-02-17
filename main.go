@@ -7,6 +7,8 @@ import (
 	"os"
 	"resident-graphql/api"
 	"resident-graphql/connection"
+	"resident-graphql/database/migration"
+	"resident-graphql/database/seeders"
 	"resident-graphql/helper"
 	"resident-graphql/middlewares"
 
@@ -24,10 +26,15 @@ func main() {
 	}
 
 	connection.Connect(os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), os.Getenv("DB_PORT"), os.Getenv("DB_SSL"), os.Getenv("DB_TIMEZONE"))
-	// migration.Migrations()
-	// seeders.Seeder()
+	migration.Migrations()
+	seeders.Seeder()
 
 	app := gin.Default()
+	app.GET("/test", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "Hello docker",
+		})
+	})
 	app.POST("/", func(c *gin.Context) {
 		type Query struct {
 			Query string
