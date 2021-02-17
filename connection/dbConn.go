@@ -3,6 +3,7 @@ package connection
 import (
 	"log"
 	"os"
+	"resident-graphql/helper"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -12,6 +13,7 @@ var dbConn *gorm.DB
 
 // Connect to DB
 func Connect() {
+	helper.SetEnvVar()
 	var (
 		dbHost     string
 		dbUser     string
