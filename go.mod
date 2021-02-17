@@ -10,7 +10,6 @@ require (
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/graphql-go/graphql v0.7.9
 	github.com/jackc/pgproto3/v2 v2.0.7 // indirect
-	github.com/joho/godotenv v1.3.0
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/ugorji/go v1.2.4 // indirect
