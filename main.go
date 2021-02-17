@@ -5,8 +5,6 @@ import (
 	"net/http"
 	"resident-graphql/api"
 	"resident-graphql/connection"
-	"resident-graphql/database/migration"
-	"resident-graphql/database/seeders"
 	"resident-graphql/helper"
 	"resident-graphql/middlewares"
 
@@ -15,8 +13,8 @@ import (
 
 func main() {
 	connection.Connect()
-	migration.Migrations()
-	seeders.Seeder()
+	// migration.Migrations()
+	// seeders.Seeder()
 
 	app := gin.Default()
 	app.POST("/", func(c *gin.Context) {
