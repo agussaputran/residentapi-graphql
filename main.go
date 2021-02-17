@@ -1,18 +1,29 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"resident-graphql/api"
 	"resident-graphql/connection"
 	"resident-graphql/helper"
 	"resident-graphql/middlewares"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	connection.Connect()
+	var err error
+	err = godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error getting env, %v", err)
+	} else {
+		fmt.Println("We are getting the env values")
+	}
+
+	connection.Connect(os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), os.Getenv("DB_PORT"), os.Getenv("DB_SSL"), os.Getenv("DB_TIMEZONE"))
 	// migration.Migrations()
 	// seeders.Seeder()
 
